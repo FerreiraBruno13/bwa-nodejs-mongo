@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  api:
+    image: node:lts-alpine
+    working_dir: /api
+    volumes:
+      - ./:/api
+    command: npm run start:dev
+    links:
+      - mongodb
+    env_file: .env.development
+    ports:
+      - 3000:3000
+
+  mongodb:
+    image: mongo
+    expose:
+      - 27017
